@@ -1,0 +1,5 @@
+script: phantomjs lib/phantomjs-run-qunit.js test/tester.html
+
+notifications:
+  email:
+    - travis-ci@kitpages.fr
