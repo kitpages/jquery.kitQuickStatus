@@ -1,6 +1,8 @@
 kitQuickStatus jQuery plugin
 ============================
 
+[![Build Status](https://travis-ci.org/kitpages/jquery.kitQuickStatus.png?branch=master)](https://travis-ci.org/kitpages/jquery.kitQuickStatus)
+
 Features
 ----------
 
@@ -12,34 +14,39 @@ LICENSE
 
 BSD (see in this directory)
 
-# AUTHOR
+AUTHOR
+------
 
 Philippe Le Van, Kitpages, http://www.kitpages.fr
 twitter : plv
 
-# History - versions
+History - versions
+------------------
 
 2013/04/10 : first version
 
-*
-
-# Requirements
+Requirements
+---------------
 
 jquery 1.9.x (should work with older versions)
 
-# Compatibility
+Compatibility
+-------------
 
 Not a lot of tests for old browsers for the moment
 
-# Known bugs
+Known bugs
+----------
 
 none for the moment
 
-# To be added in future versions
+To be added in future versions
+------------------------------
 
 * possibility to disable ajax request and only update a hidden input field.
 
-# user's guide
+user's guide
+------------
 
 Here is a small example.
 
