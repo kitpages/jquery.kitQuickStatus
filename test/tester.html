@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>unit tests</title>
+
+    <link rel="stylesheet" href="../lib/qunit-git.css">
+    <script src="../lib/qunit-git.js"></script>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../jquery.kitQuickStatus.js"></script>
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<div id="container"></div>
+
+<script>
+    var widget;
+    var element;
+    module("tests", {
+        setup: function() {
+            element = $('<a id="el" data-key="initialized"></a>');
+            $("#container").append(element);
+            element.kitQuickStatus({
+                statusList: {
+                    initialized: {
+                        label: "Init",
+                        color: "#FFF",
+                        background_color: "#000080"
+                    },
+                    payed: {
+                        label: "Payed",
+                        color: "#333",
+                        background_color: "#00FF00"
+                    }
+                }
+            });
+            widget = element.data("kitQuickStatus");
+        },
+        teardown: function() {
+            element.remove();
+        }
+    });
+    test("init", function() {
+        ok(widget._settings.useDefaultStyle, "default useDefaultStyle should be true");
+        equal(element.html(), "Init", "Content of the element should be transform according to status list");
+        equal(element.css("background-color"), "rgb(0, 0, 128)", "background color should be transform");
+    });
+    test("open event", function() {
+        expect(2);
+        var openCallback = function(event) {
+            ok(true, "menu open");
+        };
+        element.on("open_kitQuickStatus", openCallback);
+        element.click();
+        equal(element.find(".kit-quick-status-menu").length, 1, "menu should be created");
+    });
+    test("open and click", function() {
+        expect(9);
+
+        var closeAllCount = 0;
+        var closeCount = 0;
+
+        var closeAllCallback = function(event) {
+            ok(true, "close all callback");
+            closeAllCount ++;
+        };
+        var closeCallback = function(event) {
+            ok(true, "close callback");
+            closeCount++;
+        };
+        var selectCallback = function(event, data) {
+            ok(true, "select callback");
+            equal(data.key, "payed", "new value should be payed");
+        };
+        var changeCallback = function(event, data) {
+            ok(true, "change callback");
+            equal(data.key, "payed", "new value should be payed");
+        };
+        element.on("close_kitQuickStatus", closeCallback);
+        element.on("closeAll_kitQuickStatus", closeAllCallback);
+        element.on("select_kitQuickStatus", selectCallback);
+        element.on("change_kitQuickStatus", changeCallback);
+        // open menu
+        element.click();
+        // select the "payed" item
+        element.find('.kit-quick-status-menu a[data-key="payed"]').click();
+
+        equal(element.attr("data-key"), "payed", "new data-key should be modified to payed value");
+        equal(closeAllCount, 1, "closeAll should be called once");
+    });
+    test("open and escape", function() {
+        expect(6);
+
+        var closeAllCount = 0;
+        var closeCount = 0;
+
+        var closeAllCallback = function(event) {
+            ok(true, "close all callback");
+            closeAllCount ++;
+        };
+        var closeCallback = function(event) {
+            ok(true, "close callback");
+            closeCount++;
+        };
+        var selectCallback = function(event, data) {
+            ok(false, "select callback should not be called");
+        };
+        var changeCallback = function(event, data) {
+            ok(false, "change callback should not be called");
+        };
+        element.on("close_kitQuickStatus", closeCallback);
+        element.on("closeAll_kitQuickStatus", closeAllCallback);
+        element.on("select_kitQuickStatus", selectCallback);
+        element.on("change_kitQuickStatus", changeCallback);
+        // open menu
+        element.click();
+        // select the "payed" item
+        $("body").click();
+
+        equal(element.attr("data-key"), "initialized", "data-key should not be modified");
+        equal(closeAllCount, 2, "closeAll should be called once");
+    });
+</script>
+
+</body>
+</html>

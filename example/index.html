@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test kitQuickStatus</title>
+    <style>
+        .standard-table {
+            width: 100%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        .standard-table th {
+            background-color: #EEE;
+            color: #333;
+            border: 1px solid #DDD;
+            padding: 5px 10px;
+        }
+        .standard-table td {
+            border: 1px solid #DDD;
+            padding: 3px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>kitQuickStatus</h1>
+    This plugin adds menu that enables to quickly select a value and register it.
+
+    <table class="standard-table">
+        <thead>
+            <th>element</th>
+            <th>status</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>foo</td>
+                <td><a data-key="initialized">changed by the plugin</a></td>
+            </tr>
+            <tr>
+                <td>bar</td>
+                <td><a data-key="invoice_sent">changed by the plugin</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../jquery.kitQuickStatus.js"></script>
+    <script>
+        $("[data-key]").each(function() {
+            $(this).kitQuickStatus({
+                statusList: {
+                    initialized: {
+                        label: "Initialized",
+                        background_color:"#666",
+                        color:"#FFF"
+                    },
+                    invoice_sent: {
+                        label:"Invoice sent",
+                        background_color:"#FFFF00",
+                        color:"#333"
+                    },
+                    payed: {
+                        label:"Payed",
+                        background_color: "#80FF80",
+                        color:"#333"
+                    }
+                },
+                menuWidth: "200px",
+                postUrl: "postAjax.php"
+            });
+        });
+    </script>
+</body>
+</html>
