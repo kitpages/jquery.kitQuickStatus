@@ -1,12 +1,14 @@
 kitQuickStatus jQuery plugin
 ============================
 
-# Features
+Features
+----------
 
 * displays a menu
 * calls an ajax POST request to update the value
 
-# LICENSE
+LICENSE
+-------
 
 BSD (see in this directory)
 
