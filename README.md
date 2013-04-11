@@ -11,7 +11,7 @@ How to use it ?
 ---------------
 
 ```html
-<!-- creates the link that contains the initial value
+<!-- creates the link that contains the initial value -->
 <a data-key="new" class="status">changed by the plugin</a>
 
 <!-- load jquery and plugin -->
