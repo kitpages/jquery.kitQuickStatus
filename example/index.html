@@ -26,17 +26,21 @@
 
     <table class="standard-table">
         <thead>
-            <th>element</th>
-            <th>status</th>
+            <th>Order</th>
+            <th>Status</th>
         </thead>
         <tbody>
             <tr>
-                <td>foo</td>
+                <td>Order #1</td>
                 <td><a data-key="initialized">changed by the plugin</a></td>
             </tr>
             <tr>
-                <td>bar</td>
+                <td>Order #2</td>
                 <td><a data-key="invoice_sent">changed by the plugin</a></td>
+            </tr>
+            <tr>
+                <td>Order #3</td>
+                <td><a data-key="initialized">changed by the plugin</a></td>
             </tr>
         </tbody>
     </table>
@@ -52,6 +56,11 @@
                         background_color:"#666",
                         color:"#FFF"
                     },
+                    delivered: {
+                        label:"Delivered",
+                        background_color:"#FFA800",
+                        color:"#333"
+                    },
                     invoice_sent: {
                         label:"Invoice sent",
                         background_color:"#FFFF00",
@@ -63,7 +72,7 @@
                         color:"#333"
                     }
                 },
-                menuWidth: "200px",
+                menuWidth: "160px",
                 postUrl: "postAjax.php"
             });
         });

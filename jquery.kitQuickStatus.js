@@ -8,7 +8,7 @@
         // constructor
         function WidgetQuickStatus(boundingBox, options) {
             this._settings = {
-                statusList: {
+                statusList: {  // list of status. The key is the value exchanged with the server
                     "initialized": {
                         label: "Initialized",
                         background_color: "#000080",
@@ -20,20 +20,20 @@
                         color: "#FFF"
                     },
                     "key2": {
-                        label: "label 1",
+                        label: "label 2",
                         background_color: "#00FF00",
                         color: "#FFF"
                     }
-                }, // list of status of the
-                useDefaultStyle: true,
-                postUrl: null, // URL where new key is posted
-                menuWidth: null, // could be "200px" or "10%"
-                // events
-                open: null, // before menu opens
-                close: null, // when the menu is closed (selected or canceled)
-                closeAll: null, // when the menu is closed (selected or canceled)
-                select: null, // after an item was selected and line value changed
-                change: null // after an item was selected and line value changed
+                },
+                useDefaultStyle: true, // use default style hardcoded in the javascript.
+                postUrl: null, // URL where new key is posted. If null, no request is sent
+                menuWidth: null, // width of the popup menu. Could be "200px" or "10%"
+                // callback that can be used
+                open: null, // triggered before menu opens
+                close: null, // triggered before menu closes
+                closeAll: null, // triggered before calling close events on all widget on the page
+                select: null, // triggered before action on the click of the user on a new status
+                change: null // triggered when the status is changed (after the ajax request if there is an ajax request)
             };
             // settings
             if (options) {
