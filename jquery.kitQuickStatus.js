@@ -53,7 +53,6 @@
         // methods
         WidgetQuickStatus.prototype = {
             init: function() {
-                //console.debug("quickStatus init");
                 var self = this;
                 
                 var eventList = [ 'open', 'select', 'close', 'closeAll', 'change'];
@@ -120,7 +119,14 @@
             clickCallback: function (event) {
                 event.stopPropagation();
                 event.preventDefault();
-                this.open();
+                var offset = $(event.currentTarget).offset();
+                var x = event.pageX - offset.left;
+                var y = event.pageY - offset.top;
+                if (this._menu) {
+                    this.close();
+                } else {
+                    this.open(x,y);
+                }
             },
             selectCallback: function (event) {
                 event.stopPropagation();
@@ -142,8 +148,8 @@
             closeAll: function() {
                 this._boundingBox.trigger("closeAll_kitQuickStatus");
             },
-            open: function() {
-                this._boundingBox.trigger("open_kitQuickStatus");
+            open: function(x, y) {
+                this._boundingBox.trigger("open_kitQuickStatus", {x:x, y:y});
             },
             select: function(key) {
                 this._boundingBox.trigger("select_kitQuickStatus", {key: key});
@@ -189,10 +195,14 @@
                         "display": "block",
                         "position": "relative"
                     });
+                    var xPos = "10%";
+                    if (data.x) {
+                        xPos = data.x + "px";
+                    }
                     self._menu.css({
                         "position": "absolute",
                         "top": ($(this).height() / 2)+"px",
-                        "left": ($(this).width() / 10)+"px",
+                        "left": xPos,
                         "background-color": "#FFF",
                         "border": "1px solid #DDD",
                         "padding": "5px",
@@ -251,7 +261,6 @@
                     return;
                 }
                 var self = $(this).data("kitQuickStatus");
-                console.log("key="+data.key);
                 self.close();
                 self._boundingBox.css({
                     "background-color": "#666",
@@ -275,7 +284,6 @@
                     return;
                 }
                 var self = $(this).data("kitQuickStatus");
-                console.log("key changed, new="+data.key);
                 var val = self._settings.statusList[data.key];
                 self._boundingBox.attr("data-key", data.key);
                 self._boundingBox.html(val.label);
