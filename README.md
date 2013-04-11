@@ -3,7 +3,7 @@ kitQuickStatus jQuery plugin
 
 [![Build Status](https://travis-ci.org/kitpages/jquery.kitQuickStatus.png?branch=master)](https://travis-ci.org/kitpages/jquery.kitQuickStatus)
 
-![Screenshot](https://github.com/kitpages/jquery.kitQuickStatus/tree/master/doc/screenshot.png)
+![Screenshot](https://github.com/kitpages/jquery.kitQuickStatus/raw/master/doc/screenshot.png)
 
 This plugins is a simple widget that allows you to quickly select a status in a list of predefined status.
 
