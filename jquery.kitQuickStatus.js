@@ -28,6 +28,7 @@
                 useDefaultStyle: true, // use default style hardcoded in the javascript.
                 postUrl: null, // URL where new key is posted. If null, no request is sent
                 menuWidth: null, // width of the popup menu. Could be "200px" or "10%"
+                disableMenu: false, // if true, it disable the menu and the ability to change the value
                 // callback that can be used
                 open: null, // triggered before menu opens
                 close: null, // triggered before menu closes
@@ -97,9 +98,11 @@
 
 
                 // register native events
-                $("html").keydown($.proxy(this.keydownCallback, this));
-                $("html").click($.proxy(this.bodyClickCallback, this));
-                this._boundingBox.on("click.quickStatus", $.proxy(this.clickCallback, this));
+                if (!this._settings.disableMenu) {
+                    $("html").keydown($.proxy(this.keydownCallback, this));
+                    $("html").click($.proxy(this.bodyClickCallback, this));
+                    this._boundingBox.on("click.quickStatus", $.proxy(this.clickCallback, this));
+                }
                 
             },
 

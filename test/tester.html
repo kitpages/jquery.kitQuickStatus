@@ -122,6 +122,37 @@
         equal(element.attr("data-key"), "initialized", "data-key should not be modified");
         equal(closeAllCount, 2, "closeAll should be called once");
     });
+    test("disable menu", function() {
+        expect(1);
+        element.remove();
+        element = $('<a id="el" data-key="initialized"></a>');
+        $("#container").append(element);
+        element.kitQuickStatus({
+            statusList: {
+                initialized: {
+                    label: "Init",
+                    color: "#FFF",
+                    background_color: "#000080"
+                },
+                payed: {
+                    label: "Payed",
+                    color: "#333",
+                    background_color: "#00FF00"
+                }
+            },
+            disableMenu:true
+        });
+        widget = element.data("kitQuickStatus");
+
+        var openCallback = function(event, data) {
+            ok(false, "open callback should not be called");
+        };
+        element.on("open_kitQuickStatus", openCallback);
+        // open menu
+        element.click();
+        ok(! widget._menu, "menu should not open");
+    });
+
 </script>
 
 </body>
